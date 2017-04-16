@@ -7,6 +7,7 @@ tags: Delphi, Development, OmniPascal, IDEs
 ![Delphi Starter Edition Splash Screen](/images/DelphiStarterEditionSplash.png)
 
 Delphi Starter Edition is Embarcadero's free version of the Delphi programming language and IDE, in the same vein as Microsoft's Community Edition of Visual Studio. I use the Professional edition of Delphi at work, so I was interested to see how the free version stacked up. I've been working on a side project recently in Delphi, so thought I'd give the Starter Edition a try.
+<!-- more -->
 
 Delphi's gradual decline in popularity over the years hasn't been helped by Embarcadero's wide ranging focus on seemingly everything other than the core language. Chasing the panacea of multi-platform development hasn't proved especially successful, and the latest foray into Linux development just seems like a step back to when [Kylix](https://en.wikipedia.org/wiki/Borland_Kylix) was the next big thing.
 

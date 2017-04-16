@@ -6,7 +6,8 @@ tags: Mountebank, API, JSON
 
 Imagine you're building a new client application, or you have a dependency on one or more services that are outwith your control. Rather than being tied to the actual implementations, or maybe even needing to wait until another team has finished building them, you really want to just stub out the dependencies in the same way as you would with a mocking framework when unit testing. When multiple teams are all working on different services in parallel, being able to validate that the piece of the puzzle  you're working on can talk to its dependencies is vital.
 
-In the past, I've created simple stub services that simply return the data I want, replicating the interface that I'm expecting. These sort of projects tend to be throwaway, however, and it's easy to fall into the trap of just hardcoding the results you expect to receive. Ideally what you want is the simplest way of configuring behaviours so you can completely control the environment in which you're testing your code.
+In the past, I've created simple stub services that simply return the data I want, replicating the interface that I'm expecting. These sort of projects tend to be throwaway, however, and it's easy to fall into the trap of just hardcoding the results you expect to receive. Ideally what you want is the simplest way of configuring behaviours so you can completely control the environment in which you're testing your code. This is where the mountebank mocking tool comes in...
+<!-- more -->
 
 ## Introducing Mountebank... ![Mountebank logo](http://www.mbtest.org/images/mountebank.png)
 
