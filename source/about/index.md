@@ -43,4 +43,4 @@ Hi, I'm Jamie Geddes, a professional software engineer with many years of develo
 - Git
 - Subversion
 
-This site was written using [Hexo](https://hexo.io/), with content hosted as a static Amazon S3 site. Domain name registration and DNS is handled by AWS Route 53.
+This site was written using [Hexo](https://hexo.io/), with content hosted as a static Amazon S3 site. Domain name registration and DNS is handled by AWS Route 53. Banner image Scott Marsland/Creative Commons Attribution 3.0 Unported license, original source https://commons.wikimedia.org/wiki/File:Forth_Rail_Bridge_-_panoramio_(2).jpg. 
