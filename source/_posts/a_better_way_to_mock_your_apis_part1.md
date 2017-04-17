@@ -9,7 +9,9 @@ Imagine you're building a new client application, or you have a dependency on on
 In the past, I've created simple stub services that simply return the data I want, replicating the interface that I'm expecting. These sort of projects tend to be throwaway, however, and it's easy to fall into the trap of just hardcoding the results you expect to receive. Ideally what you want is the simplest way of configuring behaviours so you can completely control the environment in which you're testing your code. This is where the mountebank mocking tool comes in...
 <!-- more -->
 
-## Introducing Mountebank... ![Mountebank logo](http://www.mbtest.org/images/mountebank.png)
+## Introducing Mountebank...
+
+![Mountebank logo](http://www.mbtest.org/images/mountebank.png)
 
 [Mountebank](http://www.mbtest.org) is one solution to this problem, and one that I'll be covering in a series of upcoming posts. It's a NodeJS app, designed  to allow mock services to be spun up with the minimum of effort, allowing you to focus on your own code rather than worrying too much about external dependencies. Instead of hardcoding values, JSON can be used to define the behaviour of the mock service.
 
