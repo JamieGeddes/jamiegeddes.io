@@ -10,6 +10,9 @@ While evaluating the previous code, my natural inclination was to draw out the c
 
 The overall process had many parts to it, and I knew that additional steps would be required as I added extra functionality. As the requirements weren't well defined, I wanted to build something that could easily be extended and tweaked without reworking the entire design. The cleanest solution seemed to be to map the flow chart into a set of executable steps. At the time, I didn't find any design pattern that described the problem I was trying to address. State machines were the closest I could find, however, in my case each state wasn't just a static entity with no behaviour, instead each step needed to perform particular actions that would then dictate the path followed through the flow chart.
 
+After much thought, the following design was what I opted to go with.
+<!-- more -->
+
 ## Executable steps
 The design I came up with was to model each box in the flow chart as an executable step, containing just the logic for that one piece of functionality. Steps could either be *action* steps, which simply executed some logic and moved onto the next step in the flow, or *conditional* steps where a specified condition would be evaluated to determine which path to follow next. The context of the overall operation, i.e. the data that was common to the entire process was passed between each step in the flow.
 
@@ -24,7 +27,7 @@ The solution I came up with was to define a base interface for all steps:
     {
         void Execute(T context);
     }
-```` 
+````
 
 This could then be extended with an interface for the action step:
 
