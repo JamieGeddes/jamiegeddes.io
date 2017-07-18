@@ -1,12 +1,10 @@
 ---
-title: >-
-  Delphi.FunctionalExtensions - avoiding null dereference exceptions with the
-  Maybe type
-date: 2017-07-14 21:57:30
-tags: Delphi
+title: Avoiding null dereference exceptions with the Maybe type
+date: 2017-07-18 22:43:30
+tags: Delphi.FunctionalExtensions
 ---
 
-Null dereference exceptions are a trap awaiting the unwary developer. Careless use of object references can result in unhandled exceptions, security vulnerabilities and unhappy users! From the [OWASP description](https://www.owasp.org/index.php/Null_Dereference):
+Null dereference exceptions are a trap awaiting even the most experienced developer. Careless use of object references can result in unhandled exceptions, security vulnerabilities and ultimately unhappy users. From the [OWASP description](https://www.owasp.org/index.php/Null_Dereference):
 
 > Null pointer errors are usually the result of one or more programmer assumptions being violated. Most null pointer issues result in general software reliability problems, but if an attacker can intentionally trigger a null pointer dereference, the attacker might be able to use the resulting exception to bypass security logic or to cause the application to reveal debugging information that will be valuable in planning subsequent attacks.
 
@@ -26,7 +24,7 @@ type IWidgetRepository=interface
 end;
 ````
 
-If your answer was "an instance of TWidget" then you'd only be half right. In fact, based on the actual implementations of the IWidgetRepository interface, it's possible that it could return Nil.  All code that calls *GetById* needs to check the return value is assigned before using it, otherwise you'll get the dreaded null dereference exception. It's easy to be caught out by this, and the method signature doesn't really help here; the return type *implies* that you'll get a TWidget instance, but it doesn't *guarantee* that it can't be Nil.
+If your answer was "an instance of TWidget" then you'd only be half right. In fact, based on the actual implementations of the IWidgetRepository interface, it's possible that it could return Nil.  All code that calls *GetById* needs to check the return value is assigned before using it, otherwise you'll encounter the dreaded null dereference exception. It's easy to be caught out by this, and the method signature doesn't really help here; the return type *implies* that you'll get a TWidget instance, but it doesn't *guarantee* that it can't be Nil.
 
 One of the principles of functional programming is method signature honesty. Is there a better way to implement the method to identify that the return value may be *either* an instance of TWidget or unassigned?
 
@@ -81,7 +79,7 @@ end;
 Note the constructor can be defined with private scope, as you won't normally create an instance of the Maybe type directly. If that sounds strange, consider the following implementation of our original widget repository method:
 
 ````pascal
-function TWidgetRepositoryGetById(id: Integer): TWidget;
+function TWidgetRepository.GetById(id: Integer): TWidget;
 var
   widget: TWidget;
 begin
@@ -91,10 +89,12 @@ begin
     begin
       Result := widget;
       Break;
+    end;
   end;
 
   Result := Nil;
 end;
+
 ````
 
 and the calling code:
@@ -149,7 +149,7 @@ begin
 end;
 ````
 
-Now we're using the HasValue method to explicitly check that we have a widget to work with, whereas previously we may have forgetten the assignment check and run the risk of dereferencing a Nil reference. Because we're now forced to unwrap the value explicitly, we've eliminated the potential to try and work with the Nil widget reference. Additionally, I've renamed the variable for the object returned from the call to the repository method, to indicate that the underlying value is not always assigned.
+Now we're using the HasValue method to explicitly check that we have a widget to work with, whereas previously we may have forgotten the assignment check and run the risk of dereferencing a Nil reference. Because we're now forced to unwrap the value explicitly, we've eliminated the potential to try and work with the Nil widget reference. Additionally, I've renamed the variable for the object returned from the call to the repository method, to indicate that the underlying value is not always assigned.
 
 ## Summary
 
