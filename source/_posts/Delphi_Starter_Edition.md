@@ -1,7 +1,7 @@
 ---
 title: Delphi Starter Edition
 date: 2017-04-14 23:23:32
-tags: Delphi, Development, OmniPascal, IDEs
+tags: [Delphi, Development, OmniPascal, IDEs]
 ---
 
 ![Delphi Starter Edition Splash Screen](/images/DelphiStarterEditionSplash.png)

@@ -1,7 +1,7 @@
 ---
 title: Avoiding null dereference exceptions with the Maybe type
 date: 2017-07-18 22:43:30
-tags: Delphi.FunctionalExtensions
+tags: [Delphi.FunctionalExtensions, Delphi]
 ---
 
 Null dereference exceptions are a trap awaiting even the most experienced developer. Careless use of object references can result in unhandled exceptions, security vulnerabilities and ultimately unhappy users. From the [OWASP description](https://www.owasp.org/index.php/Null_Dereference):

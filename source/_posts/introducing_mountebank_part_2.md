@@ -1,7 +1,7 @@
 ---
 title: Introducing Mountebank (part 2) - responses and predicates
 date: 2017-04-10 22:53:01
-tags: Mountebank, API, JSON
+tags: [Mountebank, API, JSON]
 ---
 
 In the previous post, I introduced Mountebank as a way of mocking calls to services. A simple example of how to mock out a call to a real service was demonstrated, returning a dummy set of data for every call to the service endpoint. However, this example would always return the same set of data, which limits its usefulness somewhat!

@@ -1,7 +1,7 @@
 ---
 title: Mountebank-Delphi Client Library Initial Release
 date: 2017-04-18 22:46:25
-tags: Mountebank, Delphi, Development
+tags: [Mountebank, Delphi, Development]
 ---
 
 I'm happy to announce the first release of the [mountebank-delphi](https://github.com/JamieGeddes/mountebank-delphi) project I've been working on recently. It's a Delphi client library for use with the [mountebank](http://www.mbtest.org) tool, and simplifies the use of mountebank in a Delphi environment. For anyone unfamiliar with mountebank, it's a wonderfully simple tool for mocking out service dependencies.

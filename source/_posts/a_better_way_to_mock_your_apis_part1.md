@@ -1,7 +1,7 @@
 ---
 title: Introducing Mountebank - a better way to mock your APIs (part 1)
 date: 2017-02-06 22:39:05
-tags: Mountebank, API, JSON
+tags: [Mountebank, API, JSON]
 ---
 
 Imagine you're building a new client application, or you have a dependency on one or more services that are outwith your control. Rather than being tied to the actual implementations, or maybe even needing to wait until another team has finished building them, you really want to just stub out the dependencies in the same way as you would with a mocking framework when unit testing. When multiple teams are all working on different services in parallel, being able to validate that the piece of the puzzle  you're working on can talk to its dependencies is vital.
