@@ -4,7 +4,7 @@ date: 2017-07-20 22:32:20
 tags: [Alexa, Amazon, AWS, Echo]
 ---
 
-Today I've been at an Amazon Alexa Skills Day in Glasgow. Having owned an Echo for a few months now, I've dabbled with creating Alexa apps, or skills to use the Amazon terminology, so when I saw this event advertised I was keen to attend. Presented by [David Low](https://twitter.com/daviddlow), Principal Evangelist for Alexa in the EU, the event started with an overview of the Alexa ecosystem, and how successful Amazon has been in introducing its voice controlled speaker Echo over the past few years. Apparently the Echo has become such an impoortant part of everyday life for some people that Amazon has recorded upwards of 250,000 marriage proposals to Alexa...
+Today I've been at an Amazon Alexa Skills Day in Glasgow. Having owned an Echo for a few months now, I've dabbled with creating Alexa apps, or skills to use the Amazon terminology, so when I saw this event advertised I was keen to attend. Presented by [David Low](https://twitter.com/daviddlow), Principal Evangelist for Alexa in the EU, the event started with an overview of the Alexa ecosystem, and how successful Amazon has been in introducing its voice controlled speaker Echo over the past few years. Apparently the Echo has become such an important part of everyday life for some people that Amazon has recorded upwards of 250,000 marriage proposals to Alexa...
 <!-- more -->
 
 ## Alexa overview
