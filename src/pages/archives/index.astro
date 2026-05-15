@@ -1,0 +1,125 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getPublishedPosts, getPermalink } from "../../utils/posts";
+
+const posts = await getPublishedPosts(); // newest first
+
+// Group into [year, posts[]] pairs, descending by year.
+const byYear = new Map<number, typeof posts>();
+for (const post of posts) {
+  const year = post.data.date.getFullYear();
+  byYear.set(year, [...(byYear.get(year) ?? []), post]);
+}
+const years = [...byYear.entries()].sort((a, b) => b[0] - a[0]);
+---
+
+<BaseLayout
+  title="Archive"
+  description="Every post on jamiegeddes.io, organised by year."
+>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">Archive</p>
+      <h1 class="page-title">Everything, by year</h1>
+      <p class="page-lede">{posts.length} posts and counting.</p>
+    </header>
+
+    {
+      years.map(([year, yearPosts]) => (
+        <section class="year-block">
+          <h2 class="year">{year}</h2>
+          <ul class="year-list">
+            {yearPosts.map((post) => (
+              <li class="archive-row">
+                <span class="archive-date">
+                  {String(post.data.date.getDate()).padStart(2, "0")}.
+                  {String(post.data.date.getMonth() + 1).padStart(2, "0")}
+                </span>
+                <a href={getPermalink(post)} class="archive-title">
+                  {post.data.title}
+                </a>
+                {post.data.draft && <span class="draft-badge">draft</span>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .page-title {
+    font-size: clamp(2rem, 5.5vw, 2.85rem);
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    margin-top: 0.7rem;
+  }
+  .page-lede {
+    margin-top: 0.75rem;
+    color: var(--ink-soft);
+  }
+
+  .year-block {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    gap: 0 1.75rem;
+    padding-block: 1.75rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .year-block:last-child { border-bottom: 0; }
+  .year {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--ink-faint);
+    padding-top: 0.35rem;
+  }
+  .year-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .archive-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.85rem;
+    padding-block: 0.5rem;
+  }
+  .archive-date {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-faint);
+    flex-shrink: 0;
+  }
+  .archive-title {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.08rem;
+    transition: color 0.15s ease;
+  }
+  .archive-title:hover { color: var(--accent); }
+  .draft-badge {
+    font-family: var(--font-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    padding: 0.05rem 0.3rem;
+  }
+
+  @media (max-width: 540px) {
+    .year-block {
+      grid-template-columns: 1fr;
+      gap: 0.6rem;
+    }
+    .year { padding-top: 0; }
+  }
+</style>

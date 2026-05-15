@@ -1,0 +1,70 @@
+---
+import { SITE } from "../consts";
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p class="footer-brand">
+      <span class="footer-name">{SITE.title}</span>
+      <span class="footer-tagline">{SITE.tagline}</span>
+    </p>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/rss.xml">RSS</a>
+      <a href="https://github.com/JamieGeddes" rel="me noopener" target="_blank">GitHub</a>
+      <a href="/about">About</a>
+    </nav>
+    <p class="footer-meta">© {year} {SITE.author} · Built with Astro</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    background: var(--bg-raised);
+  }
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    padding-block: 2.25rem;
+  }
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  .footer-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  .footer-tagline {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 0.2rem;
+  }
+  .footer-links {
+    display: flex;
+    gap: 1.2rem;
+  }
+  .footer-links a {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    transition: color 0.15s ease;
+  }
+  .footer-links a:hover { color: var(--accent); }
+  .footer-meta {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+  }
+</style>

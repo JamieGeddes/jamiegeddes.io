@@ -1,0 +1,133 @@
+---
+import type { Post } from "../utils/posts";
+import { getPermalink, getTagPermalink } from "../utils/posts";
+import FormattedDate from "./FormattedDate.astro";
+
+interface Props {
+  post: Post;
+  /** Show the year in the date stamp (off when the list is already grouped by year). */
+  showYear?: boolean;
+}
+
+const { post, showYear = true } = Astro.props;
+const href = getPermalink(post);
+const { title, description, date, tags, draft } = post.data;
+---
+
+<article class="post-item">
+  <a href={href} class="stamp" tabindex="-1" aria-hidden="true">
+    {
+      showYear ? (
+        <FormattedDate date={date} variant="short" />
+      ) : (
+        <span class="day">
+          {String(date.getDate()).padStart(2, "0")}.
+          {String(date.getMonth() + 1).padStart(2, "0")}
+        </span>
+      )
+    }
+  </a>
+
+  <div class="body">
+    <h2 class="title">
+      <a href={href}>{title}</a>
+      {draft && <span class="draft-badge">draft</span>}
+    </h2>
+    {description && <p class="excerpt">{description}</p>}
+    {
+      tags.length > 0 && (
+        <ul class="tags">
+          {tags.map((tag) => (
+            <li>
+              <a href={getTagPermalink(tag)}>{tag}</a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</article>
+
+<style>
+  .post-item {
+    display: grid;
+    grid-template-columns: 5.5rem 1fr;
+    gap: 0 1.75rem;
+    padding-block: 1.9rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .post-item:first-child { padding-top: 0.5rem; }
+
+  .stamp {
+    padding-top: 0.5rem;
+  }
+  .day {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+  }
+
+  .title {
+    font-size: 1.45rem;
+    font-weight: 600;
+    line-height: 1.2;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+  .title a {
+    transition: color 0.15s ease;
+  }
+  .post-item:hover .title a { color: var(--accent); }
+
+  .draft-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 3px;
+    padding: 0.1rem 0.35rem;
+  }
+
+  .excerpt {
+    margin-top: 0.5rem;
+    color: var(--ink-soft);
+    font-size: 0.97rem;
+    line-height: 1.6;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin-top: 0.85rem;
+  }
+  .tags a {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.03em;
+    color: var(--ink-faint);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 0.18rem 0.6rem;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  .tags a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  @media (max-width: 540px) {
+    .post-item {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    .stamp { padding-top: 0; }
+  }
+</style>

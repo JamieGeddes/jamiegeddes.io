@@ -1,0 +1,94 @@
+---
+import { GISCUS } from "../consts";
+
+const configured =
+  !GISCUS.repoId.startsWith("TODO") && !GISCUS.categoryId.startsWith("TODO");
+---
+
+<section class="comments" aria-label="Comments">
+  <h2 class="comments-heading"><span class="eyebrow">Comments</span></h2>
+
+  {
+    configured ? (
+      <div id="giscus-root" />
+    ) : (
+      <p class="comments-todo">
+        Comments are powered by{" "}
+        <a href="https://giscus.app" rel="noopener" target="_blank">
+          giscus
+        </a>
+        . Add the <code>repoId</code> and <code>categoryId</code> values in{" "}
+        <code>src/consts.ts</code> to enable them.
+      </p>
+    )
+  }
+</section>
+
+{
+  configured && (
+    <script
+      is:inline
+      define:vars={{
+        repo: GISCUS.repo,
+        repoId: GISCUS.repoId,
+        category: GISCUS.category,
+        categoryId: GISCUS.categoryId,
+      }}
+    >
+      (() => {
+        const theme = document.documentElement.classList.contains("dark")
+          ? "transparent_dark"
+          : "light";
+        const s = document.createElement("script");
+        s.src = "https://giscus.app/client.js";
+        s.async = true;
+        s.crossOrigin = "anonymous";
+        s.setAttribute("data-repo", repo);
+        s.setAttribute("data-repo-id", repoId);
+        s.setAttribute("data-category", category);
+        s.setAttribute("data-category-id", categoryId);
+        s.setAttribute("data-mapping", "pathname");
+        s.setAttribute("data-strict", "1");
+        s.setAttribute("data-reactions-enabled", "1");
+        s.setAttribute("data-emit-metadata", "0");
+        s.setAttribute("data-input-position", "top");
+        s.setAttribute("data-theme", theme);
+        s.setAttribute("data-lang", "en");
+        s.setAttribute("data-loading", "lazy");
+        document.getElementById("giscus-root")?.appendChild(s);
+
+        // Keep giscus in step with the site's light/dark toggle.
+        window.addEventListener("themechange", (e) => {
+          const next =
+            e.detail.theme === "dark" ? "transparent_dark" : "light";
+          const iframe = document.querySelector("iframe.giscus-frame");
+          iframe?.contentWindow?.postMessage(
+            { giscus: { setConfig: { theme: next } } },
+            "https://giscus.app",
+          );
+        });
+      })();
+    </script>
+  )
+}
+
+<style>
+  .comments {
+    margin-top: 3.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--rule);
+  }
+  .comments-heading {
+    margin-bottom: 1.25rem;
+  }
+  .comments-todo {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+  .comments-todo code {
+    background: var(--code-bg);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+  }
+</style>
