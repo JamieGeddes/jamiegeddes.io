@@ -5,7 +5,7 @@
   "private": true,
   "description": "Jamie Geddes' blog — built with Astro, hosted on Cloudflare Pages",
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "dev": "astro dev",

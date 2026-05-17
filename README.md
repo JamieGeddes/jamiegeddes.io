@@ -21,7 +21,7 @@ fully static site on [Cloudflare Pages](https://pages.cloudflare.com/).
 
 ## Local development
 
-Requires Node 20+ (see `.nvmrc`).
+Requires Node 22+ (see `.nvmrc`).
 
 ```sh
 npm install
@@ -75,7 +75,7 @@ straight from the repo:
    - Framework preset: **Astro**
    - Build command: `npm run build`
    - Build output directory: `dist`
-   - Environment variable: `NODE_VERSION` = `20`
+   - Environment variable: `NODE_VERSION` = `22`
 3. The production branch in Cloudflare must match the branch you deploy from
    (`master`). Pushes to it deploy automatically; other branches and PRs get
    preview deployments at `*.pages.dev`.
