@@ -1,0 +1,59 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PostListItem from "../components/PostListItem.astro";
+import Pagination from "../components/Pagination.astro";
+import { getPublishedPosts } from "../utils/posts";
+import { SITE, PAGE_SIZE } from "../consts";
+
+const posts = await getPublishedPosts();
+const totalPages = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
+const pagePosts = posts.slice(0, PAGE_SIZE);
+---
+
+<BaseLayout title={`${SITE.title} — ${SITE.tagline}`} suffix={false}>
+  <div class="wrap">
+    <section class="intro">
+      <p class="eyebrow">{SITE.tagline}</p>
+      <h1 class="intro-title">
+        Software development, written down.
+      </h1>
+      <p class="intro-lede">
+        I'm <a href="/about">Jamie Geddes</a>, a software engineer. This is where
+        I keep notes on the things I build and the tools I build them with —
+        .NET, Delphi, APIs, voice, and the cloud.
+      </p>
+    </section>
+
+    <section class="post-list" aria-label="Recent writing">
+      <p class="eyebrow list-label">Writing</p>
+      {posts.length === 0 && <p>No posts yet — check back soon.</p>}
+      {pagePosts.map((post) => <PostListItem post={post} />)}
+      <Pagination currentPage={1} totalPages={totalPages} />
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .intro {
+    max-width: 34rem;
+    padding-block: 1rem 3.5rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 3rem;
+  }
+  .intro-title {
+    font-size: clamp(2.1rem, 6vw, 3.25rem);
+    font-weight: 700;
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    margin-top: 0.9rem;
+  }
+  .intro-lede {
+    margin-top: 1.25rem;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+  }
+
+  .list-label {
+    margin-bottom: 1.75rem;
+  }
+</style>

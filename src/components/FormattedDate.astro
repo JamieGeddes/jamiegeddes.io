@@ -1,0 +1,31 @@
+---
+import { formatDate, formatDateShort } from "../utils/posts";
+
+interface Props {
+  date: Date;
+  /** `short` renders the compact 2018.01.29 form. */
+  variant?: "long" | "short";
+  class?: string;
+}
+
+const { date, variant = "long", class: className } = Astro.props;
+const display = variant === "short" ? formatDateShort(date) : formatDate(date);
+const iso = date.toISOString();
+---
+
+<time datetime={iso} class:list={["date", variant, className]}>{display}</time>
+
+<style>
+  .date {
+    font-family: var(--font-mono);
+    color: var(--ink-faint);
+  }
+  .short {
+    font-size: 0.74rem;
+    letter-spacing: 0.04em;
+  }
+  .long {
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+  }
+</style>

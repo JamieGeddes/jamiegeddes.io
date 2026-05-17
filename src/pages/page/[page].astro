@@ -1,0 +1,36 @@
+---
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostListItem from "../../components/PostListItem.astro";
+import Pagination from "../../components/Pagination.astro";
+import { getPublishedPosts } from "../../utils/posts";
+import { PAGE_SIZE } from "../../consts";
+
+// Page 1 is served by index.astro; this route handles pages 2..n.
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getPublishedPosts();
+  // paginate() emits page 1 with an undefined param; index.astro already
+  // covers page 1, so keep only pages 2..n here.
+  return paginate(posts, { pageSize: PAGE_SIZE }).filter(
+    (entry) => Number(entry.params.page) > 1,
+  );
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+
+<BaseLayout title={`Writing — page ${page.currentPage}`}>
+  <div class="wrap">
+    <section class="post-list" aria-label="Writing">
+      <p class="eyebrow list-label">Writing · Page {page.currentPage}</p>
+      {page.data.map((post) => <PostListItem post={post} />)}
+      <Pagination currentPage={page.currentPage} totalPages={page.lastPage} />
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .list-label {
+    margin-bottom: 1.75rem;
+  }
+</style>

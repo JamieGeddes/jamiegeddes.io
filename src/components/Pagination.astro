@@ -1,0 +1,69 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+}
+
+const { currentPage, totalPages } = Astro.props;
+
+// Page 1 lives at "/", subsequent pages at "/page/2", "/page/3"...
+const pageHref = (n: number) => (n === 1 ? "/" : `/page/${n}`);
+const prev = currentPage > 1 ? pageHref(currentPage - 1) : null;
+const next = currentPage < totalPages ? pageHref(currentPage + 1) : null;
+---
+
+{
+  totalPages > 1 && (
+    <nav class="pagination" aria-label="Pagination">
+      {prev ? (
+        <a href={prev} class="page-link">← Newer</a>
+      ) : (
+        <span class="page-link disabled">← Newer</span>
+      )}
+      <span class="page-count">
+        {currentPage} / {totalPages}
+      </span>
+      {next ? (
+        <a href={next} class="page-link">Older →</a>
+      ) : (
+        <span class="page-link disabled">Older →</span>
+      )}
+    </nav>
+  )
+}
+
+<style>
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    padding-top: 1.75rem;
+    border-top: 1px solid var(--rule);
+  }
+  .page-link {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+  a.page-link:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .page-link.disabled {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .page-count {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--ink-faint);
+  }
+</style>

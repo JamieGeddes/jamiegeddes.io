@@ -1,0 +1,70 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="About"
+  description="About Jamie Geddes — a staff engineer writing about AI, agentic development and other interesting technologies."
+>
+  <div class="wrap">
+    <header class="page-head">
+      <p class="eyebrow">About</p>
+      <h1 class="page-title">Hello, I'm Jamie Geddes</h1>
+    </header>
+
+    <div class="prose about-body">
+      <p>
+        I'm a staff software engineer with many years of development
+        experience, working with a mix of cloud technologies.
+        My background is varied — everything from writing code for embedded
+        devices through to modern AI enabled web applications and services hosted in multiple
+        clouds. I'm an avid learner and like to experiment with new technology.
+      </p>
+      <p>
+        This blog is where I write up the things I build, the tools I use, and
+        whatever else is keeping me curious.
+      </p>
+
+      <h2>Find me elsewhere</h2>
+      <ul>
+        <li><a href="https://github.com/JamieGeddes">GitHub</a></li>
+      </ul>
+
+      <hr />
+
+      <p class="colophon">
+        This site is a static blog built with
+        <a href="https://astro.build/">Astro</a> and deployed on
+        <a href="https://pages.cloudflare.com/">Cloudflare Pages</a>. The source
+        lives on <a href="https://github.com/JamieGeddes/jamiegeddes.io">GitHub</a>.
+        Banner imagery, where used, is by Scott Marsland under the
+        <a
+          href="https://creativecommons.org/licenses/by/3.0/deed.en"
+          >Creative Commons Attribution 3.0</a
+        > licence —
+        <a
+          href="https://commons.wikimedia.org/wiki/File:Forth_Rail_Bridge_-_panoramio_(2).jpg"
+          >original source</a
+        >.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .page-title {
+    font-size: clamp(2rem, 5.5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    margin-top: 0.7rem;
+  }
+  .colophon {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+</style>

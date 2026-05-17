@@ -1,0 +1,66 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Page not found" description="That page could not be found.">
+  <div class="wrap notfound">
+    <p class="code">404</p>
+    <h1 class="notfound-title">This page wandered off.</h1>
+    <p class="notfound-lede">
+      The link may be broken, or the page may have moved when the site was
+      rebuilt. Let's get you back on track.
+    </p>
+    <div class="notfound-links">
+      <a href="/" class="btn">← Back to writing</a>
+      <a href="/archives" class="btn ghost">Browse the archive</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .notfound {
+    max-width: 34rem;
+    padding-block: 2rem 4rem;
+  }
+  .code {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+  }
+  .notfound-title {
+    font-size: clamp(2rem, 6vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    margin-top: 0.6rem;
+  }
+  .notfound-lede {
+    margin-top: 1rem;
+    color: var(--ink-soft);
+  }
+  .notfound-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 2rem;
+  }
+  .btn {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid var(--accent);
+    background: var(--accent);
+    color: #fff;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.ghost {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--rule);
+  }
+  .btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
+</style>
